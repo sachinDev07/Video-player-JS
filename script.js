@@ -1,51 +1,19 @@
-const myVideo = document.getElementById("myVideo");
-document.addEventListener("keydown", handleKeydown);
+const container = document.querySelector(".container");
+const video = document.querySelector("video");
+const playPauseButton = document.querySelector(".play_pause_btn");
 
-const skipValue = 22;
-const handlers = [];
+// Play/pause
+playPauseButton.addEventListener("click", togglePlay);
+video.addEventListener("click", togglePlay);
 
-for (let i = 0; i <= 9; i++) {
-  handlers.push(() => {
-    myVideo.currentTime = 0;
-    myVideo.currentTime = skipValue * i;
-  });
+function togglePlay() {
+  video.paused ? video.play() : video.pause();
 }
 
-function handleKeydown(event) {
-  if (event.key >= "0" && event.key <= "9") {
-    handlers[parseInt(event.key)]();
-  }
+video.addEventListener("play", () => {
+  container.classList.remove("paused");
+});
 
-  switch (event.key) {
-    case "k":
-    case " ":
-      if (myVideo.paused) {
-        myVideo.play();
-      } else {
-        myVideo.pause();
-      }
-      break;
-    case "m":
-      myVideo.muted = !myVideo.muted;
-      break;
-    case "ArrowUp":
-      myVideo.volume = Math.min(myVideo.volume + 0.1, 1);
-      break;
-    case "ArrowDown":
-      myVideo.volume = Math.max(myVideo.volume - 0.1, 0);
-      break;
-    case "ArrowRight":
-      myVideo.currentTime += 5;
-      break;
-    case "ArrowLeft":
-      myVideo.currentTime -= 5;
-      break;
-    case "l":
-      myVideo.currentTime += 10;
-      break;
-    case "j":
-      myVideo.currentTime -= 10;
-      break;
-  }
-}
-
+video.addEventListener("pause", () => {
+  container.classList.add("paused");
+});
