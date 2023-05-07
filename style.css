@@ -146,3 +146,14 @@ body {
     width: 100px;
     transform: scaleX(1);
 }
+
+.duration_container {
+    display: flex;
+    align-items: center;
+    gap: .25rem;
+    flex-grow: 1;
+}
+
+.container .controls button.wide_btn {
+    width: 50px;
+}
